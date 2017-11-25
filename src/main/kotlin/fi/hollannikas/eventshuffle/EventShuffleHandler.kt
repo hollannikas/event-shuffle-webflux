@@ -34,4 +34,8 @@ class EventShuffleHandler(val eventRepository: EventRepository) {
                     }
                 )
 
+    fun getEvent(req: ServerRequest) = ServerResponse
+            .ok()
+            .body(eventRepository.findById(req.pathVariable("id")))
+
 }
