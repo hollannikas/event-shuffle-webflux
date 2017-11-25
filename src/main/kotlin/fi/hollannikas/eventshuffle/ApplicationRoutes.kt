@@ -8,9 +8,8 @@ import org.springframework.web.reactive.function.server.router
 class ApplicationRoutes(val eventShuffleHandler: EventShuffleHandler) {
     @Bean
     fun routes() = router {
-        GET("/list", eventShuffleHandler::listEvents)
-        "api/v1/event".nest {
-            GET("/list", eventShuffleHandler::listEvents)
-        }
+        GET("/event", eventShuffleHandler::listEvents)
+        POST("/event", eventShuffleHandler::createEvent)
+        POST("/event/{id}/vote", eventShuffleHandler::addVote)
     }
 }

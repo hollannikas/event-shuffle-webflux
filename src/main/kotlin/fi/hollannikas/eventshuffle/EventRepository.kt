@@ -1,11 +1,8 @@
 package fi.hollannikas.eventshuffle
 
-import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
-import java.util.*
+import org.springframework.stereotype.Repository
 
-data class Vote(val name: String, val votes: Set<Date>)
-@Document
-data class Event(val name: String, val dates: Set<Date>, var votes: Set<Vote>)
+@Repository
+interface EventRepository : ReactiveCrudRepository<Event, String>
 
-interface EventRepository : ReactiveCrudRepository<Event, Long>
