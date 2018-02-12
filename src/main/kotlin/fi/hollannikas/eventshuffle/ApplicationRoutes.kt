@@ -10,6 +10,7 @@ class ApplicationRoutes(val eventShuffleHandler: EventShuffleHandler) {
     fun routes() = router {
         GET("/event", eventShuffleHandler::listEvents)
         GET("/event/{id}", eventShuffleHandler::getEvent)
+        GET("/event/{id}/result", eventShuffleHandler::getResult)
         POST("/event", eventShuffleHandler::createEvent)
         POST("/event/{id}/vote", eventShuffleHandler::addVote)
     }

@@ -7,11 +7,15 @@ data class Vote(val name: String, val votes: Set<Date>) {
     // TODO this seems unnecessary; is there a better way?
     override fun equals(other: Any?): Boolean {
         if (other is Vote) {
-            return name == other.name
+            return name === other.name
         }
         return false
     }
-    override fun hashCode(): Int = name.hashCode()
+
+    override fun hashCode(): Int {
+        return 37 * name.hashCode()
+    }
 }
 
-data class Event(val _id: String, val name: String, val dates: Set<Date>, var votes: Set<Vote> = emptySet())
+data class Event(val _id: String, val name: String, val dates: Set<Date>,
+                 var votes: MutableSet<Vote> = mutableSetOf())

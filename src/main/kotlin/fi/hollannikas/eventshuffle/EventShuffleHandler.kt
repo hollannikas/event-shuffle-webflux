@@ -26,15 +26,17 @@ class EventShuffleHandler(val eventRepository: EventRepository) {
                     req.bodyToMono(Vote::class.java).flatMap { vote ->
                         eventRepository.findById(req.pathVariable("id"))
                                 .flatMap {
-                                    val newVotes = mutableSetOf(vote)
-                                    newVotes.addAll(it.votes)
-                                    it.votes = newVotes
+                                    it.votes.add(vote)
                                     eventRepository.save(it)
                                 }
                     }
                 )
 
     fun getEvent(req: ServerRequest) = ServerResponse
+            .ok()
+            .body(eventRepository.findById(req.pathVariable("id")))
+
+    fun getResult(req: ServerRequest) = ServerResponse
             .ok()
             .body(eventRepository.findById(req.pathVariable("id")))
 
